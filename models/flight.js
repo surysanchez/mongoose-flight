@@ -8,8 +8,8 @@ const flightSchema = new mongoose.Schema({
     }, 
     airport: {
         type: String,
-        enum:['AAL','SW', 'UA', 'QTA'],
-        default: 'AAL'
+        enum:['AUS','SAN', 'DEN', 'MIA', 'LAX'],
+        default: 'MIA'
     },
     flightNo: {
         type: Number,
