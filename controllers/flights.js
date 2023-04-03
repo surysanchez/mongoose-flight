@@ -3,14 +3,21 @@ const Flight = require('../models/flight');
 module.exports = {
     index,
     new: newFlight,
-    create
+    create,
+    show
 };
 
+
+
+async function show(req, res) {
+    const flight = await Flight.findById(req.params.id);
+    res.render('flights/show', {title: 'Flight Detail', flight});
+}
+
 // render the views/flights/index 
-// not sure if inside find({}) ???
 async function index(req, res) {
     const flights = await Flight.find({});
-    res.render('flights/index', { flights });
+    res.render('flights/index', { title: 'All Flights' , flights });
   }
 
  function newFlight(req, res) {
@@ -18,11 +25,7 @@ async function index(req, res) {
  }
 
  async function create(req, res) {
-    const newFlight = new Flight();
-    //  const dt = newFlight.departs;
-    //  let departsDate = `${dt.getFullYear()}-${(dt.getMonth() +1) .toString().padStart(2, '0')}`;
-    //  departsDate += `-{dt.getDate().toString().padStart(2, '0')}T${dt.toTimeString().slice(0, 5)}`;
-    //  res.render('flights/new', {departsDate});
+       console.log(req.body)
     try {
         await Flight.create(req.body);
         res.redirect('/flights');

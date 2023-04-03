@@ -13,8 +13,10 @@ router.get('/new', flightsCrtl.new);
 // POST /flights
 router.post('/', flightsCrtl.create);
 
-// GET /flights/:id/edit
-// router.get('/:id')
+// GET /flight/:id
+router.get('/:id', flightsCrtl.show)
+
+
 
 module.exports = router;
 

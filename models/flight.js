@@ -1,6 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const destinationSchema  = new Schema({
+    airport: {
+        type: String,
+        required: true,
+        enum: ['AUS','SAN', 'DEN', 'MIA', 'LAX']
+    }, 
+    arrival: {
+        type: Date,
+        required: true,
+    }
+}, {
+    timestamps: true
+})
+
+
 const flightSchema = new mongoose.Schema({
     airline: {
         type: String,
@@ -18,15 +33,13 @@ const flightSchema = new mongoose.Schema({
 
     }, departs: {
          type: Date,
-        //  default: function(req, res, next) {
-        //  res.locals.date = new Date().toLocaleDateString();
-        //      next();
+       
         default: function() {
              const yearFromDate = new Date();
-             yearFromDate.setFullYear(yearFromDate.getFullYear()+ 1);
-             return yearFromDate;
+            //   yearFromDate.toLocaleDateString();
          }
-      }
+      },
+      destinations: [destinationSchema]
  }, {
     timestamps: true
  });

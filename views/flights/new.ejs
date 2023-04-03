@@ -1,5 +1,6 @@
 <%- include('../partials/header') %>
 
+<form id="new-form"   action="/flights" method="POST">
 <h2>Enter new Flight</h2>
 <form action="/flights" method="POST">
 
@@ -29,4 +30,5 @@
 <button type="submit">Add flight</button>
 </form>
 <p> <%= errorMsg %></p>
+</form>
 <%- include('../partials/footer') %>
