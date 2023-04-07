@@ -1,17 +1,20 @@
 <%- include('../partials/header') %>
 
-<h2>Flight List</h2>
-<table>
-  <thead>
-    <tr>
-      <th>Airline</th>
-      <th>Airport</th>
-      <th>Flight</th>
-      <th>Depart</th>
-    </tr>
-  </thead>
+<section id="list">
   <tbody>
     <% flights.forEach(function(f) { %>
+      <form action="/flights/<%= f._id %>?_method=DELETE" method="POST" class="delete-form">
+      <table>
+          <thead>
+            <tr>
+              <th>Airline</th>
+              <th>Airport</th>
+              <th>Flight</th>
+              <th>Depart</th>
+            </tr>
+          </thead>
+          <button type="submit">X</button>
+        </form>
     <tr>
       <td><%= f.airline%></td>
       <td><%= f.airport %></td>
@@ -22,5 +25,6 @@
     </tr>
   </tbody>
 </table>
-
+</section>
 <%- include('../partials/footer') %>
+

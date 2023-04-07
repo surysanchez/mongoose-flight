@@ -1,20 +1,19 @@
 <%- include('../partials/header') %>
 
 <section id="show-page">
-<div>Airline:</div>
-<div><%= flight.airline %></div>
-<div>Airport:</div>
-<div><%= flight.airport %></div>
-<div>Flight:</div>
-<div><%= flight.flightNo %></div>
-<div>Departs:</div>
-<div><%= flight.departs %></div>
-</section>
+    <div><strong>Airline:</strong></div>
+    <div><%= flight.airline %></div>
+    <div><strong>Airport:</strong></div>
+    <div><%= flight.airport %></div>
+    <div><strong>FlightNo</strong></div>
+    <div><%= flight.flightNo %></div>
+    <div><strong>Departs</strong></div>
+    <div><%= flight.departs %></div>
 
-<br><br>
-<h2>Destinations</h2>
-<form id="add-destination-form" method="POST"  action="/flights/<%= flight._id %>/destinations">
-<label>Airport:
+
+<br><h2>Destinations</h2>
+<form  id="destinations"  method="POST"  action="/flights/<%= flight._id %>/destinations">
+<label>Airport:</label>
     <select name="airport">
         <option value="AUS">Austin(AUS)</option>
         <option value="SAN">San Diego(SAN)</option>
@@ -22,11 +21,9 @@
         <option value="MIA">Miami(MIA)</option>
         <option value="LAX">Los Angeles(LAX)</option>
     </select>
- </label>
-<label>Arrival:
+<label>Arrival:</label>
     <input type="datetime-local" name="arrival" required>
-</label>
-<button type="submit">Save Destination</button>
+<input id="add-destination" type="submit" value="Add Destination">
 </form>
 
 <% if (flight.destinations.length) { %>
@@ -43,7 +40,6 @@
                     <td><%= f.airport %></td>
                     <td><%= f.arrival.toLocaleDateString() %></td>
                 </tr>
-
            <% }); %>
         </tbody>
     </table>
@@ -52,6 +48,30 @@
     <h5>No destinations Yet</h5>
 
 <% } %>
+
+
+<div>
+    <h2 id="details-h2">Tickets</h2>
+    <table>
+        <thead>
+            <th>
+                Seat
+            </th>
+            <th>
+                Price
+            </th>
+        </thead>
+        <% ticket.forEach(function(t) { %>
+            <tr>
+                <td><%= t.seat %></td>
+                <td><%= t.price %></td>
+            </td>
+        </tr>
+    <% }) %>  
+  </table>
+  <button type="submit" class="create-btn"><a href="/flights/<%= flight._id %>/tickets/new">Create a new ticket</a></button>
+</div> 
+</div> 
 
 
 <%- include('../partials/footer') %>
